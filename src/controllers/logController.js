@@ -37,10 +37,15 @@ module.exports = {
   }
 }
 
+-points manoel discord_active
+
 function event(type){
   switch(type){
+    case "join_discord":
+      return 1
+      break;
     case "discord_active": 
-      return 2
+      return 3
       break;
     case "fidelidade":
       return 10
