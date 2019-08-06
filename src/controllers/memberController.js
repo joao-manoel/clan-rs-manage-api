@@ -56,15 +56,6 @@ module.exports = {
     })
 
     return res.json(member)
-    /*
-    
-    const member = new Member(req.body)
-    
-    await member.save((err)=>{
-      if(err) return next(err)
-      return res.json(member)
-    })
-    */
   }
 
 }

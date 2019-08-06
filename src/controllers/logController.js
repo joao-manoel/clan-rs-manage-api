@@ -3,10 +3,11 @@ const Member = require('../models/members')
 module.exports = {
   async create(req, res){
     const { name, eventType } = req.params
+    const _name = name.replace('+', ' ')
 
     var points = 0
 
-    const member =  await Member.findOne({name})
+    const member =  await Member.findOne({name: _name})
 
     if(!member){
       return res.status(400).json({ message: "Membro nao encontrado"})
@@ -26,7 +27,7 @@ module.exports = {
     points += member.totalPoints
     member.update({totalPoints: points}, (err)=>{
       if(err) return res.status(400).json({ message: "Algo deu errado!"})
-      return console.log("[Server]", `${member.name} recebeu pontos de ${eventType}`)
+      return console.log("[Server]", `${member._name} recebeu pontos de ${eventType}`)
     })
 
     await member.save();
