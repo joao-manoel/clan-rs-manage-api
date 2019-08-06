@@ -34,6 +34,10 @@ const MemberSchema = new Schema({
     required: true,
     default: 0
   },
+  totalxpAfter:{
+    type: Number,
+    default: 0
+  },
   logs:[LogsSchema]
 },{
   timestamps: true

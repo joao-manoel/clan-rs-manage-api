@@ -21,7 +21,7 @@ module.exports = {
     const runemetrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${name_}&activities=20`)
     const {totalxp} = runemetrics.data
     //responsavel por busca qual clan o jogador esta
-    const buscarPlayer = await axios.get(`https://services.runescape.com/m=website-data/playerDetails.ws?names=%5B%22${name}%22%5D&callback=jQuery000000000000000_0000000000&_=0`)
+    const buscarPlayer = await axios.get(`https://services.runescape.com/m=website-data/playerDetails.ws?names=%5B%22${name_}%22%5D&callback=jQuery000000000000000_0000000000&_=0`)
     const r1 = buscarPlayer.data.replace('jQuery000000000000000_0000000000([', '')
     const r2 = r1.replace(']);', '')
     const player = JSON.parse(r2);
@@ -40,7 +40,7 @@ module.exports = {
     }
 
     //verifica se o membro ja ta adicionado no banco de dados
-    const memberExists = await Member.findOne({name: name_})
+    const memberExists = await Member.findOne({name: name})
     if(memberExists){
       return res.json({ message: 'Esse membro ja foi adicionado!'})
     }
@@ -48,7 +48,7 @@ module.exports = {
     console.log(req.body)
 
     const member = await Member.create({
-      name: name_,
+      name,
       rank,
       joined,
       totalxp,
