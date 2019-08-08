@@ -9,33 +9,15 @@ const LogsSchema = new Schema({
 })
 
 const MemberSchema = new Schema({
-  name: {
-    type: String, 
-    required: true
-  },
-  rank: {
-    type: String, 
-    required: true
-  },
-  joined: {
-    type: String, 
-    required: true
-  },
+  name: String,
+  rank: String,
   totalPoints: {
     type: Number, 
     default: 0
   },
-  clanName: {
-    type: String,
-    default: env.clan
-  },
   totalxp: {
     type: Number,
     required: true,
-    default: 0
-  },
-  totalxpAfter:{
-    type: Number,
     default: 0
   },
   logs:[LogsSchema]

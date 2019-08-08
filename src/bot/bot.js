@@ -9,7 +9,7 @@ const client = new Discord.Client()
 //informa a inicializacao e informacoes do bot
 client.on("ready", () =>{
   console.log("[BOT]", `Bot Iniciado com sucesso, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`)
-  client.user.setGame(`❤️Desenvolvido por @Manoel.`)
+  client.user.setActivity(`❤️Desenvolvido por @Manoel.`)
 })
 
 //informa os canais que o bot entrar

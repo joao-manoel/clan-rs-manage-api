@@ -25,7 +25,7 @@ module.exports = {
     })
 
     points += member.totalPoints
-    member.update({totalPoints: points}, (err)=>{
+    await member.update({totalPoints: points}, (err)=>{
       if(err) return res.status(400).json({ message: "Algo deu errado!"})
       return console.log("[Server]", `${member._name} recebeu pontos de ${eventType}`)
     })
@@ -36,9 +36,6 @@ module.exports = {
     
   }
 }
-
--points manoel discord_active
-
 function event(type){
   switch(type){
     case "join_discord":
