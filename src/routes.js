@@ -14,4 +14,6 @@ module.exports = function (server) {
   //cadastra ou atualiza os membros
   router.post('/members', MemberController.store)
 
+  router.get('/members/:name', MemberController.getUser)
+
 }
