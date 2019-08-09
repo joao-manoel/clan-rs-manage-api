@@ -1,13 +1,28 @@
 //Carrega as depedencias
 const Discord = require("discord.js")
 const env = require("../.env")
+const fs = require('fs')
 
 
 //Inicia o client do discord
 const client = new Discord.Client()
+client.commands = new Discord.Collection();
+
+fs.readdir('./src/bot/commands/', function(err, files) {
+  if(err) console.error(err)
+  if(!files) return console.error("nenhum comando encontrado")
+
+  let filesjs = files.filter(f => f.split(".").pop() == "js")
+  filesjs.forEach((f,i) =>{
+    let props = require(`./commands/${f}`)
+    console.log(`Commando ${f} carregado com sucesso`)
+    client.commands.set(props.help.name, props)
+  })
+
+});
 
 //informa a inicializacao e informacoes do bot
-client.on("ready", () =>{
+client.on("ready", () => {
   console.log("[BOT]", `Bot Iniciado com sucesso, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`)
   client.user.setActivity(`❤️Desenvolvido por @Manoel.`)
 })
@@ -19,28 +34,27 @@ client.on("guildCreate", guild => {
 })
 
 //informa qual canal o bot saiu
-client.on("guildDelete", guild =>{
+client.on("guildDelete", guild => {
   console.log("[BOT][Guild Delete]", `O bot foi removido do servidor: ${guild.name} (id: ${guild.id})`)
   //client.user.setActivity(`Serving ${client.guilds.size} servers`)
 })
 
 //comandos
-client.on("message", async message =>{
+client.on("message", async message => {
   //ignora as message do bot
-  if(message.author.bot) return
+  if (message.author.bot) return
   //ignora mensagens enviada pelo privado
-  if(message.channel.type === "dm") return;
+  if (message.channel.type === "dm") return;
 
-  //configurar o prefixo do comando
-  const args = message.content.slice(env.prefix.length).trim().split(/ +/g);
+  let messageArray = message.content.split(" ")
+  let command = messageArray[0]
+  let args = messageArray.splice(1)
 
-  //identifica os comandos
-  const comando = args.shift().toLowerCase();
+  if(!message.content.startsWith(env.prefix)) return
 
-  if(comando == "friends"){
-    const m = await message.channel.send("Friends of Pvmemes?");
-    m.edit(`I love! Queijo is gay 😂`)
-  }
+  let filescmd = client.commands.get(command.slice(env.prefix.length))
+  if(filescmd) filescmd.run(client, message, args)
+
 })
 
 client.login(env.token_dicord);
