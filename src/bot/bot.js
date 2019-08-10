@@ -45,7 +45,7 @@ client.on("message", async message => {
   //ignora mensagens enviada pelo privado
   if (message.channel.type === "dm") return;
 
-  let prefix = process.env.PREFIX
+  let prefix = '.'
 
   let messageArray = message.content.split(" ")
   let command = messageArray[0]
