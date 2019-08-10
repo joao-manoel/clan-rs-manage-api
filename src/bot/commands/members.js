@@ -5,7 +5,7 @@ const numeral = require("numeral")
 
 
 exports.run = async (client, message, args) => {
- let clan = 'Friends Of PvMEME'
+  let clan = 'Friends Of PvMEME'
   let owner  = '608109896730411030'
   let leader = '540020757481127936'
   let admin = '601912462320599051'
@@ -15,7 +15,8 @@ exports.run = async (client, message, args) => {
   let organizador = '601912748410011668'
   let membro = "538658634884841472"
 
-  let api_url = "https://my-discord-bot-friend.herokuapp.com"
+  
+  let api_url = process.env.API_URL
 
   if (args != null) {
     if (message.member.roles.has(owner)

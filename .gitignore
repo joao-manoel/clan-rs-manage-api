@@ -2,3 +2,4 @@
 /material
 package-lock.json
 config.json
+.env
