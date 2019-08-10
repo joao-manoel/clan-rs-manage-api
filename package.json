@@ -5,7 +5,8 @@
   "main": "src/loader.js",
   "scripts": {
     "test": "mocha",
-    "dev": "nodemon src/loader.js"
+    "dev": "nodemon src/loader.js",
+    "start": "nodemon src/loader.js"
   },
   "repository": {
     "type": "git",
