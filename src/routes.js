@@ -5,7 +5,7 @@ module.exports = function (server) {
 
   const router = express.Router()
   server.use('/api', router)
-  
+
   //lista todos os membros
   router.get('/members', MemberController.index)
   //cadastra ou atualiza os membros
