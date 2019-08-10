@@ -4,7 +4,7 @@ const server = express()
 
 server.use(express.json())
 
-const port = 80
+const port = 8080
 
 server.listen(port, () =>{
   console.log("[Server]", `Backend is running on port ${port}.`)
