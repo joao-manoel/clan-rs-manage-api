@@ -1,1 +1,1 @@
-Web: nodemon src/loader.js
+web: yarn start

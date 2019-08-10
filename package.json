@@ -5,8 +5,8 @@
   "main": "src/loader.js",
   "scripts": {
     "test": "mocha",
-    "dev": "node src/loader.js",
-    "start": "nodemon src/loader.js"
+    "dev": "nodemon src/loader.js",
+    "start": "node src/loader.js"
   },
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
     "mocha": "^6.2.0",
     "mongoose": "^5.6.8",
     "node-restful": "^0.2.6",
-    "nodemon": "^1.19.1",
     "numeral": "^2.0.6",
     "utf8": "^3.0.0"
   },
   "devDependencies": {
-    "pm2": "^3.5.1"
+    "pm2": "^3.5.1",
+    "nodemon": "^1.19.1"
   }
 }
