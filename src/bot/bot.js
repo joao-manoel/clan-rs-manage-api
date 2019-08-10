@@ -1,6 +1,5 @@
 //Carrega as depedencias
 const Discord = require("discord.js")
-const env = require("../.env")
 const fs = require('fs')
 
 
@@ -46,15 +45,17 @@ client.on("message", async message => {
   //ignora mensagens enviada pelo privado
   if (message.channel.type === "dm") return;
 
+  let prefix = "."
+
   let messageArray = message.content.split(" ")
   let command = messageArray[0]
   let args = messageArray.splice(1)
 
-  if(!message.content.startsWith(env.prefix)) return
+  if(!message.content.startsWith(prefix)) return
 
-  let filescmd = client.commands.get(command.slice(env.prefix.length))
+  let filescmd = client.commands.get(command.slice(prefix.length))
   if(filescmd) filescmd.run(client, message, args)
 
 })
 
-client.login(env.token_dicord);
+client.login(`NjA4MTIzODUzMjY0MTI1OTYy.XUjvlg.4m71WogbnBxMNTgd0sReZ7540Vo`);

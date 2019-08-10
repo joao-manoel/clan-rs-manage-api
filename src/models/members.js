@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongoose')
-const env = require('../.env')
 
 const MemberSchema = new Schema({
   name: String,

@@ -3,23 +3,32 @@ const Discord = require("discord.js")
 const axios = require("axios")
 const numeral = require("numeral")
 
-const utils = require("../../utils/ultis.js")
-const env = require("../../.env")
-
 
 exports.run = async (client, message, args) => {
+ let clan = 'Friends Of PvMEME'
+  let owner  = '608109896730411030'
+  let leader = '540020757481127936'
+  let admin = '601912462320599051'
+  let vice = '599616989316644871'
+  let fiscal = '601912131054469144'
+  let coordenador = '601912403814383652'
+  let organizador = '601912748410011668'
+  let membro = "538658634884841472"
+
+  let api_url = "https://my-discord-bot-friend.herokuapp.com"
+
   if (args != null) {
-    if (message.member.roles.has(env.owner)
-      || message.member.roles.has(env.leader)
-      || message.member.roles.has(env.admin)
-      || message.member.roles.has(env.vice)
-      || message.member.roles.has(env.fiscal)
-      || message.member.roles.has(env.coordenador)
-      || message.member.roles.has(env.organizador)
-      || message.member.roles.has(env.membro)) {
+    if (message.member.roles.has(owner)
+      || message.member.roles.has(leader)
+      || message.member.roles.has(admin)
+      || message.member.roles.has(vice)
+      || message.member.roles.has(fiscal)
+      || message.member.roles.has(coordenador)
+      || message.member.roles.has(organizador)
+      || message.member.roles.has(membro)) {
 
       if (args == "update" || args == "u") {
-        let update = await axios.post(`${env.api_url}/api/members`)
+        let update = await axios.post(`${api_url}/api/members`)
 
         let embed = new Discord.RichEmbed()
           .setColor('#dd4e06')
@@ -40,8 +49,8 @@ exports.run = async (client, message, args) => {
             .setDescription("Para procurar um membro digite /m username")
           message.channel.send(embed)
         } else {
-          await axios.post(`${env.api_url}/api/members`)
-          let user = await axios.get(`${env.api_url}/api/members/${data}`)
+          await axios.post(`${api_url}/api/members`)
+          let user = await axios.get(`${api_url}/api/members/${data}`)
 
 
           if (user.data != null) {
