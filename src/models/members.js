@@ -1,13 +1,6 @@
 const {Schema, model} = require('mongoose')
 const env = require('../.env')
 
-const LogsSchema = new Schema({
-  title: String,
-  points: Number
-},{
-  timestamps: true
-})
-
 const MemberSchema = new Schema({
   name: String,
   rank: String,
@@ -19,8 +12,7 @@ const MemberSchema = new Schema({
     type: Number,
     required: true,
     default: 0
-  },
-  logs:[LogsSchema]
+  }
 },{
   timestamps: true
 })
