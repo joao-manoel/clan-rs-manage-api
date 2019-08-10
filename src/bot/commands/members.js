@@ -101,7 +101,7 @@ exports.run = async (client, message, args) => {
                 },
                 {
                   name: 'Total XP',
-                  value: `__${totalskill}__`,
+                  value: `__${totalxp}__`,
                   inline: true
                 },
               ],
