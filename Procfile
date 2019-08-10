@@ -1,1 +1,1 @@
-Web: node src/loader.js
+Web: nodemon src/loader.js
