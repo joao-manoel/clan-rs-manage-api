@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
           .setAuthor(message.member.user.username, message.member.user.avatarURL)
           .setDescription(update.data.message)
           .setTimestamp()
-          .setFooter('Ate a proxima!', message.guild.iconURL);
+          .setFooter('❤️Desenvolvido por @Manoel.', message.guild.iconURL);
 
         message.channel.send(embed)
       } else {
@@ -112,13 +112,29 @@ exports.run = async (client, message, args) => {
                 icon_url: message.guild.iconURL,
               },
             }
-
-            for (i = 0; i < activities.length; i++) { 
-              card.fields.push({
-                name: activities[i].date,
-                value: `${activities[i].text}`
-              })
+            console.log(metrics.data.error)
+            if(!metrics.data.error){
+              for (i = 0; i < activities.length; i++) { 
+                card.fields.push({
+                  name: activities[i].date,
+                  value: `${activities[i].text}`
+                })
+              }
+            }else{
+              if(metrics.data.error == "PROFILE_PRIVATE"){
+                card.fields.push({
+                  name: "⛔ Error",
+                  value: "Não foi possivel busca as atividades devido o perfil ser privado!",
+                })
+              }else{
+                card.fields.push({
+                  name: "⛔ Error",
+                  value: "Ops!, Algo deu errado!"
+                })
+              }
+              
             }
+            
 
             m.edit({embed: card})
           } else {
@@ -127,7 +143,7 @@ exports.run = async (client, message, args) => {
               .setAuthor(message.member.user.username, message.member.user.avatarURL)
               .setDescription(`Nenhum membro encontrado com esse nome: ***${data}*** `)
               .setTimestamp()
-              .setFooter('Ate a proxima', message.guild.iconURL);
+              .setFooter('❤️Desenvolvido por @Manoel.', message.guild.iconURL);
 
             message.channel.send(embed)
           }

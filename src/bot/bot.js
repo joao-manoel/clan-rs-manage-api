@@ -1,5 +1,6 @@
 //Carrega as depedencias
 const Discord = require("discord.js")
+const axios = require("axios")
 const fs = require('fs')
 
 
@@ -19,6 +20,14 @@ fs.readdir('./src/bot/commands/', function(err, files) {
   })
 
 });
+
+if(!process.env.DEV){
+  setInterval(async ()=>{
+    let update = await axios.post(`${process.env.API_URL}/api/members`)
+    console.log("update com sucesso")
+  }, 300000)
+}
+
 
 //informa a inicializacao e informacoes do bot
 client.on("ready", () => {

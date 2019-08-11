@@ -1,5 +1,7 @@
 const express = require("express")
 require('./config/database')
+
+
 const server = express()
 
 
@@ -12,5 +14,6 @@ server.listen(port, () =>{
 }, (err) =>{
   if(err) console.log(err)
 })
+
 
 module.exports = server
