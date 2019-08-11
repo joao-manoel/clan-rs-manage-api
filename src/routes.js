@@ -4,7 +4,9 @@ const MemberController = require('./controllers/memberController')
 module.exports = function (server) {
 
   const router = express.Router()
+  
   server.use('/api', router)
+
 
   //lista todos os membros
   router.get('/members', MemberController.index)
