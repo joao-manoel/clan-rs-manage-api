@@ -15,4 +15,6 @@ module.exports = function (server) {
 
   router.get('/members/:name', MemberController.getUser)
 
+  console.log("[SERVER]", "Routas carregadas com sucesso.")
+
 }
