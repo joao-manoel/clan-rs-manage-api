@@ -21,9 +21,9 @@ fs.readdir('./src/bot/commands/', function(err, files) {
 
 });
 
-if(!process.env.DEV){
+if(process.env.LOCAL === false){
   setInterval(async ()=>{
-    let update = await axios.post(`${process.env.API_URL}/api/members`)
+    await axios.post(`${process.env.API_URL}/api/members`)
     console.log("update com sucesso")
   }, 300000)
 }

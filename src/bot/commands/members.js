@@ -112,7 +112,6 @@ exports.run = async (client, message, args) => {
                 icon_url: message.guild.iconURL,
               },
             }
-            console.log(metrics.data.error)
             if(!metrics.data.error){
               for (i = 0; i < activities.length; i++) { 
                 card.fields.push({
