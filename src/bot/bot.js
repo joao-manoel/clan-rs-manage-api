@@ -24,7 +24,7 @@ fs.readdir('./src/bot/commands/', function(err, files) {
   setInterval(async ()=>{
     await axios.post(`${process.env.API_URL}/api/members`)
     console.log("update com sucesso")
-  }, 6000)
+  }, 120000)
 
 
 //informa a inicializacao e informacoes do bot
