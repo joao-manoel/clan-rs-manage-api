@@ -62,6 +62,8 @@ exports.run = async (client, message, args) => {
             let totalxp_clan = numeral(user.data.totalxp).format(`0,0`)
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
             let totalxp = numeral(metrics.data.totalxp).format('0,0')
+
+            console.log(NameUrl)
             
             let activities = metrics.data.activities
 
