@@ -21,12 +21,10 @@ fs.readdir('./src/bot/commands/', function(err, files) {
 
 });
 
-if(process.env.LOCAL === false){
   setInterval(async ()=>{
     await axios.post(`${process.env.API_URL}/api/members`)
     console.log("update com sucesso")
-  }, 300000)
-}
+  }, 6000)
 
 
 //informa a inicializacao e informacoes do bot
