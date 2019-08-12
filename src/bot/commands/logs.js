@@ -5,7 +5,13 @@ const utils = require("../../utils/ultis.js")
 
 exports.run = async (client, message, args) => {
   if (args != null) {
-    var name = `${args[0]} ${utils.name(args)}`
+    
+    if(args.length == 1){
+      var name = `${utils.name(args)}`
+    }else{
+      var name = `${args[0]} ${utils.name(args)}`
+    }
+    
     var NameUrl = name.replace(" ", "_").trim()
     let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${NameUrl}&activities=20`)
     let activities = metrics.data.activities
@@ -15,6 +21,8 @@ exports.run = async (client, message, args) => {
     let totalxp = numeral(metrics.data.totalxp).format('0,0')
 
     let avatar = `https://secure.runescape.com/m=avatar-rs/${NameUrl}/chat.png`
+
+    console.log(name)
 
     var m = await message.channel.send(`${word_rand}...`)
     m.edit("Buscando...")
