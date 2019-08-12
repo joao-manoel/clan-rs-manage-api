@@ -8,12 +8,12 @@ const fs = require('fs')
 const client = new Discord.Client()
 client.commands = new Discord.Collection();
 
-fs.readdir('./src/bot/commands/', function(err, files) {
-  if(err) console.error(err)
-  if(!files) return console.error("nenhum comando encontrado")
+fs.readdir('./src/bot/commands/', function (err, files) {
+  if (err) console.error(err)
+  if (!files) return console.error("nenhum comando encontrado")
 
   let filesjs = files.filter(f => f.split(".").pop() == "js")
-  filesjs.forEach((f,i) =>{
+  filesjs.forEach((f, i) => {
     let props = require(`./commands/${f}`)
     console.log(`Commando ${f} carregado com sucesso`)
     client.commands.set(props.help.name, props)
@@ -21,10 +21,10 @@ fs.readdir('./src/bot/commands/', function(err, files) {
 
 });
 
-  setInterval(async ()=>{
-    await axios.post(`${process.env.API_URL}/api/members`)
-    console.log("update com sucesso")
-  }, 120000)
+setInterval(async () => {
+  await axios.post(`${process.env.API_URL}/api/members`)
+  console.log("update com sucesso")
+}, 120000)
 
 
 //informa a inicializacao e informacoes do bot
@@ -58,10 +58,10 @@ client.on("message", async message => {
   let command = messageArray[0]
   let args = messageArray.splice(1)
 
-  if(!message.content.startsWith(prefix)) return
+  if (!message.content.startsWith(prefix)) return
 
   let filescmd = client.commands.get(command.slice(prefix.length))
-  if(filescmd) filescmd.run(client, message, args)
+  if (filescmd) filescmd.run(client, message, args)
 
 })
 

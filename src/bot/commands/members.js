@@ -155,7 +155,7 @@ exports.run = async (client, message, args) => {
         .setColor('#fa0c0c')
         .setTitle('To de Olho!')
         .setAuthor(message.member.user.username, message.member.user.avatarURL)
-        .setDescription('Voce nao tem permisao para usar esse comando!')
+        .setDescription('Voce nao tem permisao para usar esse comando, venha fazer parte do nosso clan para poder usar!')
         .setTimestamp()
         .setFooter('Ate a proxima!', message.guild.iconURL);
 
