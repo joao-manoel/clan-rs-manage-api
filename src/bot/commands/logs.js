@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     var NameUrl = name.replace(" ", "_").trim()
     let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${NameUrl}&activities=20`)
     let activities = metrics.data.activities
-    var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca'];
+    var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca', 'Cain pegador de noiada'];
     var word_rand = word[Math.floor(Math.random() * word.length)];
     let totalskill = numeral(metrics.data.totalskill).format('0,0')
     let totalxp = numeral(metrics.data.totalxp).format('0,0')
