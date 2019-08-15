@@ -2,31 +2,16 @@
 const Discord = require("discord.js")
 const axios = require("axios")
 const numeral = require("numeral")
-
+const utils = require('../../utils/ultis.js')
 
 exports.run = async (client, message, args) => {
-  let clan = 'Friends Of PvMEME'
-  let owner  = '608109896730411030'
-  let leader = '540020757481127936'
-  let admin = '601912462320599051'
-  let vice = '599616989316644871'
-  let fiscal = '601912131054469144'
-  let coordenador = '601912403814383652'
-  let organizador = '601912748410011668'
-  let membro = "538658634884841472"
+  
 
   
   let api_url = process.env.API_URL
 
   if (args != null) {
-    if (message.member.roles.has(owner)
-      || message.member.roles.has(leader)
-      || message.member.roles.has(admin)
-      || message.member.roles.has(vice)
-      || message.member.roles.has(fiscal)
-      || message.member.roles.has(coordenador)
-      || message.member.roles.has(organizador)
-      || message.member.roles.has(membro)) {
+    if (utils.hasPermissionAll(message)) {
 
       if (args == "update" || args == "u") {
         let update = await axios.post(`${api_url}/api/members`)
@@ -197,7 +182,7 @@ exports.run = async (client, message, args) => {
         return "Sargento"
         break;
       case "Corporal":
-        return "Corporal"
+        return "Cabo"
         break;
       case "Recruit":
         return "Recruta"
