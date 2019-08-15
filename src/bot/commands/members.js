@@ -48,9 +48,12 @@ exports.run = async (client, message, args) => {
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
             let totalxp = numeral(metrics.data.totalxp).format('0,0')
 
-            console.log(NameUrl)
             
             let activities = metrics.data.activities
+
+
+
+            
 
             var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca'];
             var rand = word[Math.floor(Math.random() * word.length)];
@@ -74,7 +77,7 @@ exports.run = async (client, message, args) => {
                 },
                 {
                   name: 'Rank',
-                  value: `__${rank(user.data.rank)}__`,
+                  value: `${utils.patenteIcon(rank(user.data.rank), client)} __${rank(user.data.rank)}__`,
                   inline: true
                 },
                 {

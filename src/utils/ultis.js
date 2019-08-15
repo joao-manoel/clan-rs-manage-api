@@ -53,5 +53,10 @@ module.exports = {
     }
 
     return false
+  },
+  
+  patenteIcon(patente, client){
+    name = patente.toLowerCase().replace(/ /g, '')
+    return client.emojis.find(emoji => emoji.name === name)
   }
 }

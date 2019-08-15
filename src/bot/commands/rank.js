@@ -58,7 +58,12 @@ exports.run = async (client, message, args) => {
           name: message.member.user.username,
           icon_url: message.member.user.avatarURL,
         },
-        fields: []
+        fields: [],
+        timestamp: new Date(),
+        footer: {
+          text: '❤️Desenvolvido por @Manoel.',
+          icon_url: message.guild.iconURL,
+        }
       }
       var m = await message.channel.send(`Analisando...`)
       const recruta = client.emojis.find(emoji => emoji.name === "recruta")
