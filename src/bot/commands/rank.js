@@ -72,6 +72,7 @@ exports.run = async (client, message, args) => {
       const tenente = client.emojis.find(emoji => emoji.name === "tenente")
       const capitao = client.emojis.find(emoji => emoji.name === "capitao")
       const general = client.emojis.find(emoji => emoji.name === "general")
+      var ok = 0;
       for (i = 0; i < membros.length; i++) {
 
         if (membros[i].rank == rank[0].name) { //recruta -> cabo
@@ -110,12 +111,15 @@ exports.run = async (client, message, args) => {
             })
           }
         }else{
-          cards.fields.push({
-            name: `Esta tudo em dias!`,
-            value: `Ninguem ainda se qualificou para subir de rank!`
-          })
+          ok++
         }
 
+      }
+      if(ok >= 1){
+        cards.fields.push({
+          name: "Esta tudo em dias!",
+          value: "Ninguem ainda se qualificou para subir de rank!"
+        })
       }
 
       m.edit({ embed: cards })
