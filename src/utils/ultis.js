@@ -55,8 +55,47 @@ module.exports = {
     return false
   },
   
-  patenteIcon(patente, client){
+  emojis(patente, client){
     name = patente.toLowerCase().replace(/ /g, '')
     return client.emojis.find(emoji => emoji.name === name)
+  },
+
+  rank(data) {
+    switch (data) {
+      case "Owner":
+        return "Dono"
+        break;
+      case "Deputy Owner":
+        return "Vice Dono"
+        break;
+      case "Overseer":
+        return "Fiscal"
+        break;
+      case "Coordinator":
+        return "Coordenador"
+        break;
+      case "Organiser":
+        return "Organizador"
+        break;
+      case "General":
+        return "General"
+        break;
+      case "Captain":
+        return "Capitao"
+        break;
+      case "Lieutenant":
+        return "Tenente"
+        break;
+      case "Sergeant":
+        return "Sargento"
+        break;
+      case "Corporal":
+        return "Cabo"
+        break;
+      case "Recruit":
+        return "Recruta"
+        break;
+      default:
+    }
   }
 }

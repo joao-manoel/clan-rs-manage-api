@@ -5,19 +5,19 @@ const numeral = require("numeral")
 const utils = require('../../utils/ultis.js')
 
 exports.run = async (client, message, args) => {
-  
-
-  
+    
   let api_url = process.env.API_URL
 
   if (args != null) {
+
     if (utils.hasPermissionAll(message)) {
 
       if (args == "update" || args == "u") {
+
         let update = await axios.post(`${api_url}/api/members`)
 
         let embed = new Discord.RichEmbed()
-          .setColor('#dd4e06')
+          .setColor(0xdd4e06)
           .setTitle('Atualizacao de membros')
           .setAuthor(message.member.user.username, message.member.user.avatarURL)
           .setDescription(update.data.message)
@@ -25,21 +25,27 @@ exports.run = async (client, message, args) => {
           .setFooter('❤️Desenvolvido por @Manoel.', message.guild.iconURL);
 
         message.channel.send(embed)
+
       } else {
         data = `${args[0]} ${args[1] ? args[1] : ''} ${args[2] ? args[2] : ''} ${args[3] ? args[3] : ''} ${args[4] ? args[4] : ''}`
 
         if (data == null) {
+
           let embed = new Discord.RichEmbed()
-            .setColor("#dd4e06")
+            .setColor(0xdd4e06)
             .setAuthor(message.member.user.username, message.member.user.avatarURL)
             .setDescription("Para procurar um membro digite /m username")
+
           message.channel.send(embed)
+
         } else {
+
           await axios.post(`${api_url}/api/members`)
           let user = await axios.get(`${api_url}/api/members/${data}`)
 
 
           if (user.data != null) {
+
             var name = user.data.name
             var name = name.charAt(0).toUpperCase() + name.slice(1)
             var NameUrl = name.replace(" ", "+")
@@ -48,12 +54,7 @@ exports.run = async (client, message, args) => {
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
             let totalxp = numeral(metrics.data.totalxp).format('0,0')
 
-            
-            let activities = metrics.data.activities
-
-
-
-            
+            let activities = metrics.data.activities            
 
             var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca'];
             var rand = word[Math.floor(Math.random() * word.length)];
@@ -77,7 +78,7 @@ exports.run = async (client, message, args) => {
                 },
                 {
                   name: 'Rank',
-                  value: `${utils.patenteIcon(rank(user.data.rank), client)} __${rank(user.data.rank)}__`,
+                  value: `${utils.emojis(utils.rank(user.data.rank), client)} __${utils.rank(user.data.rank)}__`,
                   inline: true
                 },
                 {
@@ -86,7 +87,7 @@ exports.run = async (client, message, args) => {
                   inline: true
                 },
                 {
-                  name: 'Total Skill',
+                  name: `Total Skill`,
                   value: `__${totalskill}__`,
                   inline: true
                 },
@@ -95,6 +96,10 @@ exports.run = async (client, message, args) => {
                   value: `__${totalxp}__`,
                   inline: true
                 },
+                {
+                  name: `${utils.emojis('adveture', client)} Diario de aventura`,
+                  value: '____________________'
+                }
               ],
               timestamp: new Date(),
               footer: {
@@ -155,44 +160,7 @@ exports.run = async (client, message, args) => {
 
 
 
-  function rank(data) {
-    switch (data) {
-      case "Owner":
-        return "Dono"
-        break;
-      case "Deputy Owner":
-        return "Vice Dono"
-        break;
-      case "Overseer":
-        return "Fiscal"
-        break;
-      case "Coordinator":
-        return "Coordenador"
-        break;
-      case "Organiser":
-        return "Organizador"
-        break;
-      case "General":
-        return "General"
-        break;
-      case "Captain":
-        return "Capitao"
-        break;
-      case "Lieutenant":
-        return "Tenente"
-        break;
-      case "Sergeant":
-        return "Sargento"
-        break;
-      case "Corporal":
-        return "Cabo"
-        break;
-      case "Recruit":
-        return "Recruta"
-        break;
-      default:
-    }
-  }
+  
 
 }
 

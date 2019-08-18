@@ -109,6 +109,11 @@ exports.run = async (client, message, args) => {
               value: `Ja pode subir ${general} __General__`
             })
           }
+        }else{
+          cards.fields.push({
+            name: `Esta tudo em dias!`,
+            value: `Ninguem ainda se qualificou para subir de rank!`
+          })
         }
 
       }
