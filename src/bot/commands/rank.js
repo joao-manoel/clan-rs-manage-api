@@ -123,7 +123,9 @@ exports.run = async (client, message, args) => {
       }
 
       m.edit({ embed: cards })
+
     }else{
+      
       var cards = {
         color: 0xdd4e06,
         author: {
