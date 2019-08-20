@@ -81,7 +81,9 @@ exports.run = async (client, message, args) => {
               name: `${recruta} ${membros[i].name}`,
               value: `Ja pode subir ${cabo} __Cabo__`
             })
+            ok = -500
           }
+          
         } else if (membros[i].rank == rank[1].name) { // cabo -> sargento
           if (membros[i].totalxp >= rank[2].xp) {
             cards.fields.push({
@@ -95,6 +97,7 @@ exports.run = async (client, message, args) => {
               name: `${sargento} ${membros[i].name}`,
               value: `Ja pode subir ${tenente} __Tenente__`
             })
+            ok = -500
           }
         } else if (membros[i].rank == rank[3].name) { // tenente -> capitao
           if (membros[i].totalxp >= rank[4].xp) {
@@ -102,6 +105,7 @@ exports.run = async (client, message, args) => {
               name: `${tenente} ${membros[i].name}`,
               value: `Ja pode subir ${capitao} __Capitao__`
             })
+            ok = -500
           }
         } else if (membros[i].rank == rank[4].name) { // capitao -> general
           if (membros[i].totalxp >= rank[5].xp) {
@@ -109,6 +113,7 @@ exports.run = async (client, message, args) => {
               name: `${capitao} ${membros[i].name}`,
               value: `Ja pode subir ${general} __General__`
             })
+            ok = -500
           }
         }else{
           ok++
