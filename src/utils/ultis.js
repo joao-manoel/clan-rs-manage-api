@@ -60,6 +60,10 @@ module.exports = {
     return client.emojis.find(emoji => emoji.name === name)
   },
 
+  convertName(name){
+    return name.charAt(0).toUpperCase() + name.slice(1)
+  },
+
   rank(data) {
     switch (data) {
       case "Owner":
