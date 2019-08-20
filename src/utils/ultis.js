@@ -64,6 +64,10 @@ module.exports = {
     return name.charAt(0).toUpperCase() + name.slice(1)
   },
 
+  convertNameUrl(name){
+    name.replace(' ', '_')
+  },
+
   rank(data) {
     switch (data) {
       case "Owner":

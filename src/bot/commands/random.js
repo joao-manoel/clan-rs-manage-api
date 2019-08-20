@@ -15,6 +15,9 @@ exports.run = async (client, message, args) => {
     
     var send = await message.channel.send(`Embaralhando os membros...`)
 
+    var word = ['Eu escolho voce!', 'Que sortudo!', 'E o escolhido é...']
+    word = word[Math.floor(Math.random() * word.length)]
+
 
     var cards = {
       color: 0xdd4e06,
@@ -27,7 +30,7 @@ exports.run = async (client, message, args) => {
       },
       fields: [
         {
-          name: "E o escolhido é...",
+          name: word,
           value: `***${name}***`
         }
       ],
@@ -46,7 +49,7 @@ exports.run = async (client, message, args) => {
     setTimeout(() =>{
       
       send.edit({embed: cards})
-    }, 9000)
+    }, 4000)
     
 
   }else{
