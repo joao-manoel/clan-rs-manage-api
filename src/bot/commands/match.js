@@ -74,8 +74,8 @@ exports.run = async (client, message, args) => {
       },
       fields: [
         {
-          name: word,
-          value: `***${utils.convertName(match1)}*** ${graf} ***${utils.convertName(match2)}***`
+          name: ` \` ${word} \`  `,
+          value: `*${utils.convertName(match1)}* \`${graf}\` *${utils.convertName(match2)}*`
         }
       ],
       footer: {
