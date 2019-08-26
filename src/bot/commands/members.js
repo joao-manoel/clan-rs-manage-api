@@ -5,14 +5,11 @@ const numeral = require("numeral")
 const utils = require('../../utils/ultis.js')
 
 exports.run = async (client, message, args) => {
-    
+
   let api_url = process.env.API_URL
 
-  if (args != null) {
-
-    if (utils.hasPermissionAll(message)) {
-
-      if (args == "update" || args == "u") {
+  if (args.length >= 1) {
+      if (args[0] == "update" || args[0] == "u") {
 
         let update = await axios.post(`${api_url}/api/members`)
 
@@ -34,7 +31,7 @@ exports.run = async (client, message, args) => {
           let embed = new Discord.RichEmbed()
             .setColor(0xdd4e06)
             .setAuthor(message.member.user.username, message.member.user.avatarURL)
-            .setDescription("Para procurar um membro digite /m username")
+            .setDescription("Para procurar um membro digite `.ilog username`")
 
           message.channel.send(embed)
 
@@ -54,13 +51,13 @@ exports.run = async (client, message, args) => {
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
             let totalxp = numeral(metrics.data.totalxp).format('0,0')
 
-            let activities = metrics.data.activities            
+            let activities = metrics.data.activities
 
             var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca'];
             var rand = word[Math.floor(Math.random() * word.length)];
 
             var m = await message.channel.send(`${rand}...`)
-            m.edit("Buscando...")           
+            m.edit("Buscando...")
 
             const card = {
               color: 0xdd4e06,
@@ -96,74 +93,180 @@ exports.run = async (client, message, args) => {
                   value: `__${totalxp}__`,
                   inline: true
                 },
-                {
-                  name: `${utils.emojis('adveture', client)} Diario de aventura`,
-                  value: '____________________'
-                }
+
               ],
               timestamp: new Date(),
               footer: {
-                text: '❤️Desenvolvido por @Manoel.',
+                text: '❤️Desenvolvido por @manoel.',
                 icon_url: message.guild.iconURL,
               },
             }
-            if(!metrics.data.error){
-              for (i = 0; i < activities.length; i++) { 
-                card.fields.push({
-                  name: activities[i].date,
-                  value: `${activities[i].text}`
-                })
+
+            if (!metrics.data.error) {
+              var logs = (logs) =>{
+                var log = ``
+                for (i = 0; i < 7; i++) {
+                  log += ` [${logs[i].date}] ${logs[i].text} \n`
+                }
+                return log
               }
-            }else{
-              if(metrics.data.error == "PROFILE_PRIVATE"){
+
+              card.description = "```" + logs(activities) + "```"
+              
+            } else {
+              if (metrics.data.error == "PROFILE_PRIVATE") {
                 card.fields.push({
                   name: "⛔ Error",
                   value: "Não foi possivel busca as atividades devido o perfil ser privado!",
                 })
-              }else{
+              } else {
                 card.fields.push({
                   name: "⛔ Error",
                   value: "Ops!, Algo deu errado!"
                 })
               }
-              
+
             }
-            
 
-            m.edit({embed: card})
+
+            m.edit({ embed: card })
           } else {
-            let embed = new Discord.RichEmbed()
-              .setColor('#dd4e06')
-              .setAuthor(message.member.user.username, message.member.user.avatarURL)
-              .setDescription(`Nenhum membro encontrado com esse nome: ***${data}*** `)
-              .setTimestamp()
-              .setFooter('❤️Desenvolvido por @Manoel.', message.guild.iconURL);
+            //vai quem nao e membro
+            if (args.length == 1) {
+              var name = `${utils.name(args)}`
+            } else {
+              var name = `${args[0]} ${utils.name(args)}`
+            }
 
-            message.channel.send(embed)
+            var NameUrl = name.replace(" ", "_").trim()
+            let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${NameUrl}&activities=20`)
+            let activities = metrics.data.activities
+            var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca', 'Cain pegador de noiada']
+            var word_rand = word[Math.floor(Math.random() * word.length)];
+            let totalskill = numeral(metrics.data.totalskill).format('0,0')
+            let totalxp = numeral(metrics.data.totalxp).format('0,0')
+
+            let avatar = `https://secure.runescape.com/m=avatar-rs/${NameUrl}/chat.png`
+
+            var m = await message.channel.send(`${word_rand}...`)
+            m.edit("Buscando...")
+
+            var name = name.charAt(0).toUpperCase() + name.slice(1)
+
+            if (metrics.data.error) {
+              if (metrics.data.error == "PROFILE_PRIVATE") {
+                var card = {
+                  color: 0xdd4e06,
+                  author: {
+                    name: message.member.user.username,
+                    icon_url: message.member.user.avatarURL,
+                  },
+                  thumbnail: {
+                    url: avatar,
+                  },
+                  fields: [
+                    {
+                      name: 'Rs Nickname',
+                      value: `__${name}__`,
+                    },
+                    {
+                      name: '-',
+                      value: '***Devido o perfil ser privado nao foi possivel pega os logs!***'
+                    }
+
+                  ],
+                  timestamp: new Date(),
+                  footer: {
+                    text: '❤️Desenvolvido por @<@275622111266209793>.',
+                    icon_url: message.guild.iconURL,
+                  },
+                }
+              } else {
+                var card = {
+                  color: 0xdd4e06,
+                  author: {
+                    name: message.member.user.username,
+                    icon_url: message.member.user.avatarURL,
+                  },
+                  thumbnail: {
+                    url: avatar,
+                  },
+                  fields: [
+                    {
+                      name: 'Rs Nickname',
+                      value: `***__${name}__***`,
+                      color: 0xdd4e06
+                    },
+                    {
+                      name: '-',
+                      value: '***Ops!, Algo de errado nao esta certo!***'
+                    }
+
+                  ],
+                  timestamp: new Date(),
+                  footer: {
+                    text: '❤️Desenvolvido por @Manoel.',
+                    icon_url: message.guild.iconURL,
+                  },
+                }
+              }
+            } else {
+              var card = {
+                color: 0xdd4e06,
+                author: {
+                  name: message.member.user.username,
+                  icon_url: message.member.user.avatarURL,
+                },
+                thumbnail: {
+                  url: avatar,
+                },
+                fields: [
+                  {
+                    name: 'Rs Nickname',
+                    value: `__${name}__`,
+                  },
+                  {
+                    name: 'Total Skill',
+                    value: `__${totalskill}__`,
+                    inline: true
+                  },
+                  {
+                    name: 'Total XP',
+                    value: `__${totalxp}__`,
+                    inline: true
+                  }
+                ],
+                timestamp: new Date(),
+                footer: {
+                  text: '❤️Desenvolvido por @Manoel.',
+                  icon_url: message.guild.iconURL,
+                },
+              }
+
+              var logs = (logs) =>{
+                var log = ``
+                for (i = 0; i < 7; i++) {
+                  log += ` [${logs[i].date}] ${logs[i].text} \n`
+                }
+                return log
+              }
+
+              card.description = "```" + logs(activities) + "```"
+
+            }
+
+
+
+            m.edit({ embed: card })
           }
 
         }
 
       }
-    } else {
-      let embed = new Discord.RichEmbed()
-        .setColor('#fa0c0c')
-        .setTitle('To de Olho!')
-        .setAuthor(message.member.user.username, message.member.user.avatarURL)
-        .setDescription('Voce nao tem permisao para usar esse comando, venha fazer parte do nosso clan para poder usar!')
-        .setTimestamp()
-        .setFooter('Ate a proxima!', message.guild.iconURL);
-
-      message.channel.send(embed)
-    }
+    
   }
-
-
-
-  
-
 }
 
 exports.help = {
-  name: "m"
+  name: "logs"
 }

@@ -16,8 +16,7 @@ exports.run = async (client, message, args) => {
     var match2 = args[1]
 
 
-    if (match1 == "manoel" || match2 == "manoel"
-        || match1 == "<@275622111266209793>" || match2 == "<@275622111266209793>") {
+    if (match1 == "manoel" || match2 == "manoel"|| match1 == "<@275622111266209793>" || match2 == "<@275622111266209793>") {
       if (match1 == "sininho" || match2 == "sininho" || match1 == "<@195727507373162497>" || match2 == "<@195727507373162497>"
         || match1 == "uvinha chan" || match2 == "uvinha chan" || match1 == "<@265277939208290315>" || match2 == "<@265277939208290315>"
         || match1 == "fumiguinha" || match2 == "fumiguinha" || match1 == "<@584911898319912961>" || match2 == "<@584911898319912961>"
@@ -79,7 +78,7 @@ exports.run = async (client, message, args) => {
         }
       ],
       footer: {
-        text: '❤️Desenvolvido por @Manoel.'
+        text: '❤️Desenvolvido por @manoel.'
       }
     }
 
@@ -135,7 +134,7 @@ exports.run = async (client, message, args) => {
         }
       ],
       footer: {
-        text: '❤️Desenvolvido por @Manoel.'
+        text: '❤️Desenvolvido por @manoel.'
       }
     }
 
