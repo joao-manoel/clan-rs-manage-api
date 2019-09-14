@@ -12,9 +12,9 @@ module.exports = {
 
   setTime(duration){
     if(duration.hours > 0){
-      return `${duration.hours} hours ${duration.minutes} minutes ${duration.seconds} seconds`
+      return `${duration.hours}:${duration.minutes}:${duration.seconds}`
     }else{
-      return `${duration.minutes} minutes ${duration.seconds} seconds`
+      return `${duration.minutes}:${duration.seconds}`
     }
     
   },
