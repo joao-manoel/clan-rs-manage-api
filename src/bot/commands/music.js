@@ -8,8 +8,8 @@ const queue = new Map();
 
 exports.run = async (client, message, args) => {
 
-  const searchString = args.slice(2).join(' ')
-  const url = args[2] ? args[2].replace(/<(.+)>/g, '$1') : ''
+  const searchString = args.slice(1).join(' ')
+  const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : ''
   const serverQueue = queue.get(message.guild.id)
   console.log("STRING: ", searchString)
   console.log("URL: ", url)
@@ -186,5 +186,5 @@ exports.run = async (client, message, args) => {
 
 
 exports.help = {
-  name: 'm'
+  name: 'music'
 }

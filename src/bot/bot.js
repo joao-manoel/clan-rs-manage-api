@@ -49,8 +49,6 @@ client.on("guildDelete", guild => {
 client.on("message", async message => {
   //ignora as message do bot
   if (message.author.bot) return
-  //ignora mensagens enviada pelo privado
-  if (message.channel.type === "dm") return;
 
   let prefix = process.env.PREFIX ? process.env.PREFIX : '.'
 
