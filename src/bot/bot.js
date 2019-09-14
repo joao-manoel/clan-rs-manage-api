@@ -23,7 +23,7 @@ fs.readdir('./src/bot/commands/', function (err, files) {
 
 setInterval(async () => {
   await axios.post(`${process.env.API_URL}/api/members`)
-  console.log("update com sucesso")
+  console.log(".")
 }, 900000)
 
 
