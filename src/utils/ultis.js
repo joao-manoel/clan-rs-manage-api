@@ -10,6 +10,15 @@ module.exports = {
     return name
   },
 
+  setTime(duration){
+    if(duration.hours > 0){
+      return `${duration.hours} hours ${duration.minutes} minutes ${duration.seconds} seconds`
+    }else{
+      return `${duration.minutes} minutes ${duration.seconds} seconds`
+    }
+    
+  },
+
   hasPermissionAll(message, group = 1) {
     let local = '608109896730411030'
     let leader = '540020757481127936'

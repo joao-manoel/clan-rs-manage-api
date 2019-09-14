@@ -1,6 +1,7 @@
 const { Util } = require('discord.js')
 const YouTube = require('simple-youtube-api')
 const ytdl = require('ytdl-core')
+const utils = require('../../utils/ultis.js')
 
 const youtube = new YouTube(process.env.GOOGLE_API_KEY)
 
@@ -11,10 +12,6 @@ exports.run = async (client, message, args) => {
   const searchString = args.slice(1).join(' ')
   const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : ''
   const serverQueue = queue.get(message.guild.id)
-  console.log("STRING: ", searchString)
-  console.log("URL: ", url)
-  console.log("CM: ", args[0])
-
   if (args[0] == "play" || args[0] == "p") {
     const voiceChannel = message.member.voiceChannel
 
@@ -93,7 +90,7 @@ exports.run = async (client, message, args) => {
 		if (!serverQueue) return message.channel.send('Não a nada tocando.');
 		return message.channel.send(`Tocando: **${serverQueue.songs[0].title}**`);
 	}else if (args[0] === 'queue') {
-		if (!serverQueue) return message.channel.send('Não a nada tocando.');
+		if (!serverQueue) return message.channel.send('Não a nada tocando.')
 		return message.channel.send(`
     __**Lista de Música:**__
 
@@ -103,27 +100,29 @@ exports.run = async (client, message, args) => {
         `);
 	}else if (args[0] === 'pause') {
 		if (serverQueue && serverQueue.playing) {
-			serverQueue.playing = false;
-			serverQueue.connection.dispatcher.pause();
-			return message.channel.send('⏸ Pausou');
+			serverQueue.playing = false
+			serverQueue.connection.dispatcher.pause()
+			return message.channel.send('⏸ Pausou')
 		}
 		return message.channel.send('Não a nada tocando.');
 	} else if (args[0] === 'resume') {
 		if (serverQueue && !serverQueue.playing) {
-			serverQueue.playing = true;
-			serverQueue.connection.dispatcher.resume();
-			return message.channel.send('▶ Rusumindo');
+			serverQueue.playing = true
+			serverQueue.connection.dispatcher.resume()
+			return message.channel.send('▶ Rusumindo')
 		}
-		return message.channel.send('Não a nada tocando.');
+		return message.channel.send('Não a nada tocando.')
 	}
 
   async function handleVideo(video, msg, voiceChannel, playlist = false) {
-    const serverQueue = queue.get(msg.guild.id);
-    console.log(video);
+    const serverQueue = queue.get(msg.guild.id)
     const song = {
       id: video.id,
       title: Util.escapeMarkdown(video.title),
-      url: `https://www.youtube.com/watch?v=${video.id}`
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+      thumb: video.thumbnails.default.url,
+      channel: video.channel.title,
+      time: utils.setTime(video.duration)
     };
     if (!serverQueue) {
       const queueConstruct = {
@@ -144,41 +143,95 @@ exports.run = async (client, message, args) => {
         play(message.guild, queueConstruct.songs[0]);
 
       } catch (error) {
-        console.error(`Eu não pude entrar no canal de voz: ${error}`);
-        queue.delete(msg.guild.id);
-        return msg.channel.send(`Eu não pude entrar no canal de voz: ${error}`);
+        console.error(`Eu não pude entrar no canal de voz: ${error}`)
+        queue.delete(msg.guild.id)
+        return msg.channel.send(`Eu não pude entrar no canal de voz: ${error}`)
       }
     } else {
-      serverQueue.songs.push(song);
-      console.log(serverQueue.songs);
-      if (playlist) return undefined;
-      else return msg.channel.send(`Agora **${song.title}** foi adicionado a lista!`);
+      serverQueue.songs.push(song)
+      console.log(serverQueue.songs)
+      if (playlist){ 
+        return undefined 
+      }
+      else{
+        var card = {
+          color: 0xdd4e06,
+          title: song.title,
+          url: song.url,
+          author: {
+            name: 'Added queue',
+            icon_url: message.member.user.avatarURL,
+          },
+          thumbnail: {
+            url: song.thumb
+          },
+          fields: [
+            {
+              name: 'Channel',
+              value: video.channel.title,
+              inline: true
+            },
+            {
+              name: 'Song Duration',
+              value: utils.setTime(video.duration)
+            }
+          ]
+        }
+
+        return msg.channel.send({embed: card});
+      } 
+      
     }
     return undefined;
   }
 
 
   function play(guild, song) {
-    const serverQueue = queue.get(guild.id);
+    const serverQueue = queue.get(guild.id)
 
     if (!song) {
-      serverQueue.voiceChannel.leave();
-      queue.delete(guild.id);
+      serverQueue.voiceChannel.leave()
+      queue.delete(guild.id)
       return;
     }
-    console.log(serverQueue.songs);
+    console.log(serverQueue.songs)
 
 
-    const stream = ytdl(song.url, { filter: 'audioonly' });
-    const dispatcher = serverQueue.connection.playStream(stream, song.url);
+    const stream = ytdl(song.url, { filter: 'audioonly' })
+    const dispatcher = serverQueue.connection.playStream(stream, song.url)
     dispatcher.on('end', reason => {
-      serverQueue.songs.shift();
-      play(guild, serverQueue.songs[0]);
+      serverQueue.songs.shift()
+      play(guild, serverQueue.songs[0])
     })
-      .on('error', error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+      .on('error', error => console.error(error))
+    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5)
 
-    serverQueue.textChannel.send(`Tocando: **${song.title}**`);
+    var card = {
+      color: 0xdd4e06,
+      title: song.title,
+      url: song.url,
+      author: {
+        name: 'Added queue',
+        icon_url: message.member.user.avatarURL,
+      },
+      thumbnail: {
+        url: song.thumb
+      },
+      fields: [
+        {
+          name: 'Channel',
+          value: song.channel,
+          inline: true
+        },
+        {
+          name: 'Song Duration',
+          value: song.time,
+          inline: true
+        }
+      ]
+    }
+
+    serverQueue.textChannel.send({embed: card})
   }
 }
 
