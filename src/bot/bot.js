@@ -2,7 +2,7 @@
 const Discord = require("discord.js")
 const axios = require("axios")
 const fs = require('fs')
-
+var ffmpeg = require('ffmpeg-static')
 
 //Inicia o client do discord
 const client = new Discord.Client()
