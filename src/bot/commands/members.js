@@ -45,7 +45,6 @@ exports.run = async (client, message, args) => {
 
             var name = user.data.name
             var name = name.charAt(0).toUpperCase() + name.slice(1)
-            var NameUrl = name.replace(/ /g, "+")
             let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${utils.convertNameUrl(name)}&activities=20`)
             let totalxp_clan = numeral(user.data.totalxp).format(`0,0`)
             let totalskill = numeral(metrics.data.totalskill).format('0,0')

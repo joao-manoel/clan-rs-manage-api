@@ -61,7 +61,7 @@ client.on("message", async message => {
   if (!message.content.startsWith(prefix)) return
 
   let filescmd = client.commands.get(command.slice(prefix.length))
-  if (filescmd) filescmd.run(client, message, args)
+  if (filescmd) filescmd.run(client, message, args, command)
 
 })
 
