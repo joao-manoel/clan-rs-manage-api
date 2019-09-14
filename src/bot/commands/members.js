@@ -45,7 +45,7 @@ exports.run = async (client, message, args) => {
 
             var name = user.data.name
             var name = name.charAt(0).toUpperCase() + name.slice(1)
-            var NameUrl = name.replace(" ", "+")
+            var NameUrl = name.replace(/ /g, "+")
             let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${NameUrl}&activities=20`)
             let totalxp_clan = numeral(user.data.totalxp).format(`0,0`)
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
@@ -59,6 +59,8 @@ exports.run = async (client, message, args) => {
             var m = await message.channel.send(`${rand}...`)
             m.edit("Buscando...")
 
+            console.log(NameUrl)
+
             const card = {
               color: 0xdd4e06,
               author: {
@@ -66,7 +68,7 @@ exports.run = async (client, message, args) => {
                 icon_url: message.member.user.avatarURL,
               },
               thumbnail: {
-                url: `https://secure.runescape.com/m=avatar-rs/${NameUrl}/chat.png`,
+                url: `https://secure.runescape.com/m=avatar-rs/${utils.convertNameUrl(name)}/chat.png`,
               },
               fields: [
                 {
@@ -177,7 +179,7 @@ exports.run = async (client, message, args) => {
                   ],
                   timestamp: new Date(),
                   footer: {
-                    text: '❤️Desenvolvido por @<@275622111266209793>.',
+                    text: '❤️Desenvolvido por @Manoel.',
                     icon_url: message.guild.iconURL,
                   },
                 }

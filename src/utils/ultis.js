@@ -65,7 +65,7 @@ module.exports = {
   },
 
   convertNameUrl(name){
-    name.replace(' ', '_')
+    return name.replace(/ /g, '_')
   },
 
   rank(data) {
