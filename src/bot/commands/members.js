@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
             var name = user.data.name
             var name = name.charAt(0).toUpperCase() + name.slice(1)
             var NameUrl = name.replace(/ /g, "+")
-            let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${NameUrl}&activities=20`)
+            let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${utils.convertNameUrl(name)}&activities=20`)
             let totalxp_clan = numeral(user.data.totalxp).format(`0,0`)
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
             let totalxp = numeral(metrics.data.totalxp).format('0,0')
@@ -59,7 +59,6 @@ exports.run = async (client, message, args) => {
             var m = await message.channel.send(`${rand}...`)
             m.edit("Buscando...")
 
-            console.log(NameUrl)
 
             const card = {
               color: 0xdd4e06,
@@ -140,15 +139,14 @@ exports.run = async (client, message, args) => {
               var name = `${args[0]} ${utils.name(args)}`
             }
 
-            var NameUrl = name.replace(" ", "_").trim()
-            let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${NameUrl}&activities=20`)
+            let metrics = await axios.get(`https://apps.runescape.com/runemetrics/profile/profile?user=${utils.convertNameUrl(name)}&activities=20`)
             let activities = metrics.data.activities
             var word = ['Queijo gado demais', 'Vougan gay', 'Brazil noob', 'Setimus Chico Bióca', 'Cain pegador de noiada']
             var word_rand = word[Math.floor(Math.random() * word.length)];
             let totalskill = numeral(metrics.data.totalskill).format('0,0')
             let totalxp = numeral(metrics.data.totalxp).format('0,0')
 
-            let avatar = `https://secure.runescape.com/m=avatar-rs/${NameUrl}/chat.png`
+            let avatar = `https://secure.runescape.com/m=avatar-rs/${utils.convertNameUrl(name)}/chat.png`
 
             var m = await message.channel.send(`${word_rand}...`)
             m.edit("Buscando...")
