@@ -82,8 +82,8 @@ exports.run = async (client, message, args) => {
 	} else if (args[0] === 'volume') {
 		if (!message.member.voiceChannel) return message.channel.send('Você não está em um canal de voz!');
 		if (!serverQueue) return message.channel.send('Não está tocando.');
-		if (!args[2]) return message.channel.send(`O Volume atual é: **${serverQueue.volume}**`);
-		serverQueue.volume = args[2];
+		if (!args[1]) return message.channel.send(`O Volume atual é: **${serverQueue.volume}**`);
+		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[2] / 5);
 		return message.channel.send(`Ajustar volume para: **${args[2]}**`);
 	} else if (args[0] === 'np') {

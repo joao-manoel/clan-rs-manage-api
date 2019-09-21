@@ -30,7 +30,7 @@ setInterval(async () => {
 //informa a inicializacao e informacoes do bot
 client.on("ready", () => {
   console.log("[BOT]", `Bot Iniciado com sucesso, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`)
-  client.user.setActivity(`❤️Desenvolvido por @Manoel.`)
+  client.user.setActivity(`❤️Desenvolvido por @Manoel | .help.`)
 })
 
 //informa os canais que o bot entrar
