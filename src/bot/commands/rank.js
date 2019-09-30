@@ -139,7 +139,7 @@ exports.run = async (client, message, args) => {
         fields: [
           {
             name: "Permissao Negada",
-            value: 'Voce nao tem permissao para usar esse comando!'
+            value: 'Voce não tem permissão para usar esse comando!'
           }
         ]
       }
