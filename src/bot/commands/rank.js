@@ -62,7 +62,6 @@ exports.run = async (client, message, args) => {
         timestamp: new Date(),
         footer: {
           text: '❤️Desenvolvido por @Manoel.',
-          icon_url: message.guild.iconURL,
         }
       }
       var m = await message.channel.send(`Analisando...`)

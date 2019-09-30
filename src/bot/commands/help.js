@@ -27,7 +27,6 @@ exports.run = async (client, message, args) => {
     timestamp: new Date(),
     footer: {
       text: '❤️Desenvolvido por @manoel.',
-      icon_url: message.guild.iconURL,
     },
     
   }

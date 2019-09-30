@@ -98,7 +98,6 @@ exports.run = async (client, message, args) => {
               timestamp: new Date(),
               footer: {
                 text: '❤️Desenvolvido por @manoel.',
-                icon_url: message.guild.iconURL,
               },
             }
 
@@ -177,7 +176,6 @@ exports.run = async (client, message, args) => {
                   timestamp: new Date(),
                   footer: {
                     text: '❤️Desenvolvido por @Manoel.',
-                    icon_url: message.guild.iconURL,
                   },
                 }
               } else {
@@ -205,7 +203,6 @@ exports.run = async (client, message, args) => {
                   timestamp: new Date(),
                   footer: {
                     text: '❤️Desenvolvido por @Manoel.',
-                    icon_url: message.guild.iconURL,
                   },
                 }
               }
@@ -238,7 +235,6 @@ exports.run = async (client, message, args) => {
                 timestamp: new Date(),
                 footer: {
                   text: '❤️Desenvolvido por @Manoel.',
-                  icon_url: message.guild.iconURL,
                 },
               }
 

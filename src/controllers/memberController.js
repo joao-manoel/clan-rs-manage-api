@@ -33,7 +33,7 @@ module.exports = {
 
     allMembers.forEach(async members => {
       if(!verificar(membros, ['name', members.name])){
-        Member.remove({name: members.name}, (err) =>{
+        Member.deleteOne({name: members.name}, (err) =>{
           if(!err){
             console.log(`O membro: ${members.name} foi removido do banco de dados!`)
           }else{
@@ -97,7 +97,6 @@ module.exports = {
   },
 
   async index(req, res, next) {
-    
     await Member.find({}, null, {sort: {totalxp: 'desc'}}, (err, members) => {
       if (err) return next(err)
       return res.json(members)
