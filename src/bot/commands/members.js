@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
 
         let embed = new Discord.RichEmbed()
           .setColor(0xdd4e06)
-          .setTitle('Atualizacao de membros')
+          .setTitle('Atualizacão de membros')
           .setAuthor(message.member.user.username, message.member.user.avatarURL)
           .setDescription(update.data.message)
           .setTimestamp()
@@ -169,7 +169,7 @@ exports.run = async (client, message, args) => {
                     },
                     {
                       name: '-',
-                      value: '***Devido o perfil ser privado nao foi possivel pega os logs!***'
+                      value: '***Devido o perfil ser privado não foi possivel pega os logs!***'
                     }
 
                   ],
@@ -196,7 +196,7 @@ exports.run = async (client, message, args) => {
                     },
                     {
                       name: '-',
-                      value: '***Ops!, Algo de errado nao esta certo!***'
+                      value: '***Ops!, Algo de errado não esta certo!***'
                     }
 
                   ],
