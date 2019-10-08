@@ -4,7 +4,7 @@ const axios = require("axios")
 const numeral = require("numeral")
 const utils = require('../../utils/ultis.js')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, dm) => {
 
   let api_url = process.env.API_URL
 
@@ -16,7 +16,7 @@ exports.run = async (client, message, args) => {
         let embed = new Discord.RichEmbed()
           .setColor(0xdd4e06)
           .setTitle('Atualizacão de membros')
-          .setAuthor(message.member.user.username, message.member.user.avatarURL)
+          .setAuthor(message.author.username, message.author.avatarURL)
           .setDescription(update.data.message)
           .setTimestamp()
           .setFooter('❤️Desenvolvido por @Manoel.', message.guild.iconURL);

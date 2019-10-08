@@ -1,7 +1,7 @@
 const axios = require("axios")
 const utils = require('../../utils/ultis.js')
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, dm) => {
   if (utils.hasPermissionAll(message, 2)) {
 
     var membros = await axios.get(`${process.env.API_URL}/api/members`)

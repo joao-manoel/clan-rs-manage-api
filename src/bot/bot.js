@@ -2,6 +2,7 @@
 const Discord = require("discord.js")
 const axios = require("axios")
 const fs = require('fs')
+const utils = require('../utils/ultis.js')
 var ffmpeg = require('ffmpeg-static')
 
 //Inicia o client do discord
@@ -23,7 +24,6 @@ fs.readdir('./src/bot/commands/', function (err, files) {
 
 setInterval(async () => {
   await axios.post(`${process.env.API_URL}/api/members`)
-  console.log(".")
 }, 900000)
 
 
@@ -47,8 +47,15 @@ client.on("guildDelete", guild => {
 
 //comandos
 client.on("message", async message => {
+
+  var dm = false
+  
   //ignora as message do bot
   if (message.author.bot) return
+  if (message.channel.type === 'dm'){
+    dm = true
+    console.log(dm)
+  }
 
   let prefix = process.env.PREFIX ? process.env.PREFIX : '.'
 
@@ -59,7 +66,7 @@ client.on("message", async message => {
   if (!message.content.startsWith(prefix)) return
 
   let filescmd = client.commands.get(command.slice(prefix.length))
-  if (filescmd) filescmd.run(client, message, args, command)
+  if (filescmd) filescmd.run(client, message, args, command, dm)
 
 })
 

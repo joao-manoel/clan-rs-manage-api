@@ -7,7 +7,7 @@ const youtube = new YouTube(process.env.GOOGLE_API_KEY)
 
 const queue = new Map();
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, dm) => {
 
   const searchString = args.slice(1).join(' ')
   const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : ''
