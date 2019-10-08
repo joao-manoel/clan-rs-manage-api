@@ -1,6 +1,7 @@
 //Carrega as depedencias
 const Discord = require("discord.js")
 const axios = require("axios")
+const jimp = require('jimp')
 const fs = require('fs')
 const utils = require('../utils/ultis.js')
 var ffmpeg = require('ffmpeg-static')
@@ -30,7 +31,7 @@ setInterval(async () => {
 //informa a inicializacao e informacoes do bot
 client.on("ready", () => {
   console.log("[BOT]", `Bot Iniciado com sucesso, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`)
-  client.user.setActivity(`❤️Desenvolvido por @Manoel | .help.`)
+  client.user.setActivity(`❤️Desenvolvido por @Manoel`)
 })
 
 //informa os canais que o bot entrar
@@ -45,14 +46,51 @@ client.on("guildDelete", guild => {
   //client.user.setActivity(`Serving ${client.guilds.size} servers`)
 })
 
+
+client.on("guildMemberAdd", async member => {
+
+  let channel = process.env.DEV ? client.channels.get(`608109375810437140`) : client.channels.get(`544514586280460288`)
+  let font = await jimp.loadFont(jimp.FONT_SANS_32_BLACK)
+  let mask = await jimp.read('./src/assets/img/bg/mascara.png')
+  let background = await jimp.read('./src/assets/img/bg/fundo.png')
+
+  jimp.read(member.user.displayAvatarURL).then(avatar => {
+    avatar.resize(111, 111)
+    mask.resize(111, 111)
+    avatar.mask(mask)
+    background.print(
+      font,
+      90,
+      170,
+      {
+        text: member.user.username,
+        alignmentX: jimp.HORIZONTAL_ALIGN_CENTER,
+        alignmentY: jimp.VERTICAL_ALIGN_BOTTOM
+      },
+      441,
+      76
+    )
+    background.composite(avatar, 247, 7).write('welcome.png')
+    channel.send(``, {
+      files: ['welcome.png']
+    })
+
+    console.log(`${member.user.username} recebeu as boas-vindas!`)
+  })
+    .catch(err => {
+      console.log('Error ao carregar a imagem de boas vindas')
+    })
+})
+
+
 //comandos
 client.on("message", async message => {
 
   var dm = false
-  
+
   //ignora as message do bot
   if (message.author.bot) return
-  if (message.channel.type === 'dm'){
+  if (message.channel.type === 'dm') {
     dm = true
     console.log(dm)
   }
