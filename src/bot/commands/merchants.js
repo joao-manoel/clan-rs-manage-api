@@ -33,14 +33,14 @@ exports.run = async (client, message, args) => {
         "```css\n"+
         `${data}` +
         "``` \n" +
-        `> __Slot 1__ = **${slot1}** ` +
-        ` | __Slot 2__ = **${slot2}** \n` +
+        `> __Slot 1__ = **${slot1}** \n` +
+        `> __Slot 2__ = **${slot2}** \n` +
         `> __Slot 3__ = **${slot3}** \n\n` +
         "```css\n"+
         `${dataTomorrow}` +
         "``` \n" +
-        `> __Slot 1__ - **${slot1Tomorrow}**` +
-        ` | __Slot 2__ - **${slot2Tomorrow}** \n` +
+        `> __Slot 1__ - **${slot1Tomorrow}** \n` +
+        `> __Slot 2__ - **${slot2Tomorrow}** \n` +
         `> __Slot 3__ - **${slot3Tomorrow}**`
         
       }
