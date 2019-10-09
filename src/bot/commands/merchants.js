@@ -44,6 +44,7 @@ exports.run = async (client, message, args) => {
         `> __Slot 3__ - **${slot3Tomorrow}**`
         
       }
+      console.log(new Date().getHours())
       return message.channel.send({embed: card})
     }
   })
