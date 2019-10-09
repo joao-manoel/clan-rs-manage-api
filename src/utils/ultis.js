@@ -77,6 +77,11 @@ module.exports = {
     return name.replace(/ /g, '_').trim()
   },
 
+  ConfirmCurrentDate(date){
+    date = date.split(" ")
+    
+  },
+
   rank(data) {
     switch (data) {
       case "Owner":

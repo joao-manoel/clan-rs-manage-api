@@ -1,34 +1,31 @@
-const jimp = require('jimp')
+const request = require('request')
+const cheerio = require('cheerio')
+
+const URL = 'https://runescape.wiki/w/Travelling_Merchant%27s_Shop/Future'
+
 
 async function main() {
+  await request(URL, function(err, res, body){
+    if(err){
+      console.log(err)
+    }else{
+      console.log('scraping links')
+      var $ = cheerio.load(body)
 
-  let font = await jimp.loadFont(jimp.FONT_SANS_32_BLACK)
-  let mask = await jimp.read('./src/assets/img/bg/mascara.png')
-  let background = await jimp.read('./src/assets/img/bg/fundo.png')
-
-  jimp.read('https://conteudo.imguol.com.br/c/entretenimento/b4/2019/06/27/cena-de-homem-aranha-longe-de-casa-1561657357585_v2_900x506.png').then(avatar => {
-      avatar.resize(111, 111)
-      mask.resize(111, 111)
-      avatar.mask(mask)
-      background.print(
-        font,
-        90,
-        170,
-        {
-          text: 'Homem Aranha',
-          alignmentX: jimp.HORIZONTAL_ALIGN_CENTER,
-          alignmentY: jimp.VERTICAL_ALIGN_BOTTOM
-        },
-        441,
-        76
-      )
-      background.composite(avatar, 247, 7).write('beta.png')
-    })
-    .catch(err => {
-      console.log('Error ao carregar a imagem de boas vindas')
-    })
+      
+      console.log($('tbody tr td').eq(0).text())
+      console.log($('tbody tr td').eq(1).text())
+      console.log($('tbody tr td').eq(2).text())
+      console.log($('tbody tr td').eq(3).text())
+      console.log($('tbody tr td').eq(4).text())
 
 
+      /*
+      $('tbody tr').each(function(i, link){
+        console.log('%s', $('td').text())
+      })*/
+    }
+  })
 }
 
 main()
