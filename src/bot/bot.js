@@ -43,7 +43,7 @@ client.on("ready", async () => {
     var date = d.getDate() + "/" + month + "/" + d.getFullYear()
     let notification = await axios.get(`${process.env.API_URL}/api/notification/bm`)
     console.log(`Proximo anuncio sera as ${process.env.HOURS}:${process.env.MINUTES}`)
-    if (d.getHours() == process.env.HOUR && d.getMinutes() == process.env.MINUTES) {
+    if (d.getHours() == process.env.HOURS && d.getMinutes() == process.env.MINUTES) {
       if (notification.data[0]['ativo'] == 1) {
         client.channels.get(channelId).send(`
         ${client.emojis.find(emoji => emoji.name === 'bm')} **Evento PvM - BM** ${client.emojis.find(emoji => emoji.name === 'bm')}
