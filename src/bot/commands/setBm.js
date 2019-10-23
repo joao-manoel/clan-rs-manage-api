@@ -10,6 +10,7 @@ exports.run = async (client, message, args) => {
       
     }else if(args[0] = 'desativar'){
       let update = await axios.post(`${process.env.API_URL}/api/notification/bm/0`)
+      message.channel.send(`Anuncio desativado! \n proximo anuncio sera daqui 1 reset`)
     }
   }
 }
