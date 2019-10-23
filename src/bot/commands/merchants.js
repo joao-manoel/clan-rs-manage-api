@@ -11,14 +11,14 @@ exports.run = async (client, message, args) => {
       var $ = cheerio.load(body)
 
       var data = $('tbody tr td').eq(0).text(),
-        slot1 = $('tbody tr td').eq(1).text(),
-        slot2 = $('tbody tr td').eq(2).text(),
-        slot3 = $('tbody tr td').eq(3).text()
+          slot1 = $('tbody tr td').eq(1).text(),
+          slot2 = $('tbody tr td').eq(2).text(),
+          slot3 = $('tbody tr td').eq(3).text()
 
       var dataTomorrow = $('tbody tr td').eq(4).text(),
-        slot1Tomorrow = $('tbody tr td').eq(5).text(),
-        slot2Tomorrow = $('tbody tr td').eq(6).text(),
-        slot3Tomorrow = $('tbody tr td').eq(6).text()
+          slot1Tomorrow = $('tbody tr td').eq(5).text(),
+          slot2Tomorrow = $('tbody tr td').eq(6).text(),
+          slot3Tomorrow = $('tbody tr td').eq(6).text()
 
       const card = {
         color: 0xdd4e06,
