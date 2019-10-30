@@ -8,7 +8,7 @@ module.exports = {
   channelId = process.env.DEV ? '636585335706615822' : '538659409249697793'
   setInterval(async () => {
     var d = new Date()
-    var month = d.getMonth() + 1 >= 10 ? d.getMonth() + 1 : "0" + d.getMonth() + 1
+    var month = d.getMonth() + 1 >= 10 ? d.getMonth() + 1 : `0${d.getMonth() + 1}`
     var date = d.getDate() + "/" + month + "/" + d.getFullYear()
     let notification = await axios.get(`${process.env.API_URL}/api/notification/bm`)
     console.log(`Proximo anuncio sera as ${process.env.HOURS}:${process.env.MINUTES}`)
