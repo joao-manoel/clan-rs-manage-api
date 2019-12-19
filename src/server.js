@@ -1,8 +1,11 @@
 const express = require("express")
+const cors = require("cors")
 require('./config/database')
 
 
 const server = express()
+
+server.use(cors)
 
 
 server.use(express.json())

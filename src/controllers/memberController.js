@@ -39,6 +39,8 @@ module.exports = {
           }else{
             console.log(`Nao foi possivel remover o membro: ${members.name}`)
           }
+        }).catch(function(e){
+          console.log(e)
         })
       }
     })
@@ -68,6 +70,8 @@ module.exports = {
             totalxp
           }, (err) => {
             if (err) return console.log(err)
+          }).catch(function(e){
+            console.log(e)
           })
         }
       } else {
@@ -77,6 +81,8 @@ module.exports = {
           totalxp
         }, (err) => {
           if (err) return console.log(err)
+        }).catch(function(e){
+          console.log(e)
         })
       }
     })
