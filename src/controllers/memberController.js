@@ -4,7 +4,7 @@ const Member = require('../models/members')
 module.exports = {
 
   async store(req, res, next) {
-    const file = await axios.get('http://services.runescape.com/m=clan-hiscores/members_lite.ws?clanName=friends+of+pvmeme')
+    const file = await axios.get('https://services.runescape.com/m=clan-hiscores/members_lite.ws?clanName=friends+of+pvmeme')
     let data = file.data.split("\n")
     data = data.splice(1)
 
