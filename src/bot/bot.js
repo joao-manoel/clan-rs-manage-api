@@ -25,9 +25,7 @@ fs.readdir('./src/bot/commands/', function (err, files) {
 });
 
 setInterval(async () => {
-  await axios.post(`${process.env.API_URL}/api/members`).then().catch(function(e){
-    console.log(e);
-  })
+  await axios.post(`${process.env.API_URL}/api/members`)
 }, 900000)
 
 

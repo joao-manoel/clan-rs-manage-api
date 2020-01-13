@@ -33,7 +33,7 @@ module.exports = {
 
     allMembers.forEach(async members => {
       if(!verificar(membros, ['name', members.name])){
-        Member.deleteOne({name: members.name}, (err) =>{
+        await Member.deleteOne({name: members.name}, (err) =>{
           if(!err){
             console.log(`O membro: ${members.name} foi removido do banco de dados!`)
           }else{

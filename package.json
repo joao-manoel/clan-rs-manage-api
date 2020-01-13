@@ -43,6 +43,7 @@
     "numeral": "^2.0.6",
     "request": "^2.88.0",
     "simple-youtube-api": "^5.2.1",
+    "simplecrawler": "git+https://github.com/konstantinblaesi/node-simplecrawler.git#refactor-and-puppeteer",
     "utf8": "^3.0.0",
     "ytdl-core": "^0.29.7"
   },
